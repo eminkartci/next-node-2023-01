@@ -1,0 +1,8 @@
+.container{
+    min-height: 200px;
+    width: 100%;
+    background-color: aqua;
+
+    display: flex;
+    justify-content: space-around;
+}
