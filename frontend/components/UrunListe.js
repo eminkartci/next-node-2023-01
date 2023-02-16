@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Urun from "./Urun.js";
 import styles from "../styles/UrunListe.module.css";
+import axios from "axios";
 
 function UrunListe() {
   // ! Backend'den ürünleri çekip ekranda göstermek !!
@@ -11,14 +12,23 @@ function UrunListe() {
   ]);
 
   useEffect(()=>{
-    const yeniUrunListe = [
-      {id: 1, isim: "Elbise", fiyat: 55, gorsel: "albise1.webp"},
-      {id: 2, isim: "Bilgisayar", fiyat:10000},
-      {id: 3, isim: "Araba", fiyat:350000},
-      {id: 4, isim: "Plak", fiyat:320}
-    ]
+    console.log('Ürünler Back-end Üzerinden Çekiliyor');
 
-    setUrunliste(yeniUrunListe);
+    var config = {
+      method: 'get',
+      url: 'http://localhost:4111/urunler',
+      headers: { }
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log("Cevap: ",response);
+      setUrunliste(response.data.data)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
   },[])
 
   return <div>
